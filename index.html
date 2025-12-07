@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attack Bypass</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+
+            /* dotted background */
+            background: #0e0e0e;
+            background-image: radial-gradient(#444 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Header bar */
+        .navbar {
+            width: 100%;
+            height: 60px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .nav-left img {
+            height: 150px;
+            /* home icon size */
+            cursor: pointer;
+        }
+
+        .nav-right img {
+            height: 100px;
+            /* discord icon size */
+            cursor: pointer;
+        }
+
+        .nav-left img:hover,
+        .nav-right img:hover {
+            opacity: 0.8;
+        }
+
+        main {
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Navigation -->
+    <div class="navbar">
+        <!-- Left: Home -->
+        <div class="nav-left">
+            <a href="assets/home">
+                <img src="assets/home.png" alt="Home Button">
+            </a>
+        </div>
+
+        <!-- Right: Discord -->
+        <div class="nav-right">
+            <a href="https://discord.gg/MgG8aDgYms" target="_blank">
+                <img src="assets/discord.png" alt="Discord">
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>
