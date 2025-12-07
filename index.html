@@ -33,13 +33,11 @@
 
         .nav-left img {
             height: 150px;
-            /* home icon size */
             cursor: pointer;
         }
 
         .nav-right img {
             height: 100px;
-            /* discord icon size */
             cursor: pointer;
         }
 
@@ -51,6 +49,26 @@
         main {
             padding: 20px;
         }
+
+        /* ============================
+           🔥 Glowing License Box
+        ============================ */
+        .license-box {
+            width: 300px;
+            padding: 20px;
+            margin: 40px auto;
+
+            background: #b00000; /* red interior */
+            color: white;
+            font-size: 20px;
+            text-align: center;
+            border-radius: 12px;
+
+            /* black + red outer glow */
+            box-shadow:
+                0 0 15px 4px rgba(0, 0, 0, 0.9),
+                0 0 25px 10px rgba(255, 0, 0, 0.7);
+        }
     </style>
 </head>
 
@@ -58,19 +76,22 @@
 
     <!-- Top Navigation -->
     <div class="navbar">
-        <!-- Left: Home -->
         <div class="nav-left">
             <a href="assets/home">
                 <img src="assets/home.png" alt="Home Button">
             </a>
         </div>
 
-        <!-- Right: Discord -->
         <div class="nav-right">
             <a href="https://discord.gg/MgG8aDgYms" target="_blank">
                 <img src="assets/discord.png" alt="Discord">
             </a>
         </div>
+    </div>
+
+    <!-- 🔥 Glowing License Box -->
+    <div class="license-box">
+        Your license will appear here...
     </div>
 
 </body>
