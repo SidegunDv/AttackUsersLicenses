@@ -1,95 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Attack Bypass</title>
     <link rel="icon" type="image/png" href="assets/logo.png">
-
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
+            background: #000;
             color: white;
-
-            /* Dotted background */
-            background: #0e0e0e;
-            background-image: radial-gradient(#444 1px, transparent 1px);
-            background-size: 20px 20px;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Header bar */
         .navbar {
-            width: 100%;
             height: 60px;
             background: #1a1a1a;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
-            box-sizing: border-box;
+            z-index: 1000;
+        }
+        .nav-left img { height: 150px; cursor: pointer; }
+        .nav-right img { height: 100px; cursor: pointer; }
+        .nav-left img:hover, .nav-right img:hover { opacity: 0.8; }
+
+        .full-layout {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 10;
         }
 
-        .nav-left img {
-            height: 150px;
-            cursor: pointer;
+        @font-face {
+            font-family: 'LEMONMILK';
+            src: url('../fonts/LEMONMILK-Regular.woff2') format('woff2'),
+                 url('../fonts/LEMONMILK-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
         }
 
-        .nav-right img {
-            height: 100px;
-            cursor: pointer;
-        }
-
-        .nav-left img:hover,
-        .nav-right img:hover {
-            opacity: 0.8;
-        }
-
-        main {
-            padding: 20px;
-        }
-
-        /* ============================
-           🔥 Glowing License Box
-        ============================ */
         .license-box {
+            font-family: 'LEMONMILK', sans-serif;
             width: 500px;
             min-height: 600px;
-            height: auto;
             padding: 40px;
-            margin: 100px auto 0;
-            background: #003d6e;
-            color: rgb(255, 0, 140);
-            font-size: 13px;
-            text-align: left;
+            background: url('assets/logo.png') center/contain no-repeat;
+            opacity: 0.50;
+            color: #ff0000;
             border-radius: 12px;
-            box-shadow:
-                0 0 15px 4px rgba(124, 123, 123, 0.9),
-                0 0 65px 10px rgb(0, 132, 255);
+            box-shadow: 0 0 20px 6px rgba(255,0,0,0.7),
+                        0 0 80px 15px rgba(255,0,0,0.9);
+            z-index: 1;
+            position: relative;  
+            text-align: center;
         }
 
-        #license-list {
-            padding: 0;
-            list-style-type: none;
-        }
-
+        #license-list { list-style: none; padding: 0; margin: 0; }
         #license-list li {
-            padding: 5px 0;
+            padding: 10px 0;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #ff0000;
+            text-shadow: 0 0 15px #ff0000;
         }
+
+        /* PARTICLES CONTAINER */
+        #particle-container {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ffffff;
+            box-shadow: 0 0 10px 1px #ff0000a4;
+            animation: fly linear infinite;
+        }
+
+        @keyframes fly {
+            0%   { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(var(--x), var(--y)) rotate(360deg); }
+        }
+
+        /* 50 WHITE PARTICLES – ALL VISIBLE & FLYING FAST */
+        .particle:nth-child(1)  { top:10%; left:5%;   --x:800px;   --y:-900px;  animation-duration:6s; }
+        .particle:nth-child(2)  { top:20%; left:80%;  --x:-1000px; --y:800px;   animation-duration:5s; }
+        .particle:nth-child(3)  { top:70%; left:10%;  --x:1200px;  --y:-700px;  animation-duration:7s; }
+        .particle:nth-child(4)  { top:40%; left:90%;  --x:-900px;  --y:-1000px; animation-duration:5.5s; }
+        .particle:nth-child(5)  { top:80%; left:30%;  --x:1100px;  --y:900px;   animation-duration:6.5s; }
+        .particle:nth-child(6)  { top:15%; left:60%;  --x:-1200px; --y:1000px;  animation-duration:4.8s; }
+        .particle:nth-child(7)  { top:55%; left:20%;  --x:1000px;  --y:-800px;  animation-duration:7.2s; }
+        .particle:nth-child(8)  { top:30%; left:70%;  --x:-800px;  --y:-900px;  animation-duration:5.8s; }
+        .particle:nth-child(9)  { top:90%; left:50%;  --x:1300px;  --y:700px;   animation-duration:6.3s; }
+        .particle:nth-child(10) { top:5%;  left:40%;  --x:-1100px; --y:950px;   animation-duration:5.2s; }
+
+        .particle:nth-child(11) { top:25%; left:15%; --x:900px;   --y:-850px;  animation-duration:6.8s; }
+        .particle:nth-child(12) { top:65%; left:85%; --x:-950px;  --y:880px;   animation-duration:5.5s; }
+        .particle:nth-child(13) { top:45%; left:5%;  --x:1050px;  --y:-920px;  animation-duration:7s; }
+        .particle:nth-child(14) { top:75%; left:95%; --x:-1150px; --y:-780px;  animation-duration:6s; }
+        .particle:nth-child(15) { top:35%; left:45%; --x:980px;   --y:870px;   animation-duration:5.9s; }
+        .particle:nth-child(16) { top:10%; left:5%;  --x:800px;   --y:-900px;  animation-duration:6s; }
+        .particle:nth-child(17) { top:20%; left:80%; --x:-1000px; --y:800px;   animation-duration:5s; }
+        .particle:nth-child(18) { top:70%; left:10%; --x:1200px;  --y:-700px;  animation-duration:7s; }
+        .particle:nth-child(19) { top:40%; left:90%; --x:-900px;  --y:-1000px; animation-duration:5.5s; }
+        .particle:nth-child(20) { top:80%; left:30%; --x:1100px;  --y:900px;   animation-duration:6.5s; }
+        .particle:nth-child(21) { top:15%; left:60%; --x:-1200px; --y:1000px;  animation-duration:4.8s; }
+        .particle:nth-child(22) { top:55%; left:20%; --x:1000px;  --y:-800px;  animation-duration:7.2s; }
+        .particle:nth-child(23) { top:30%; left:70%; --x:-800px;  --y:-900px;  animation-duration:5.8s; }
+        .particle:nth-child(24) { top:90%; left:50%; --x:1300px;  --y:700px;   animation-duration:6.3s; }
+        .particle:nth-child(25) { top:5%;  left:40%; --x:-1100px; --y:950px;   animation-duration:5.2s; }
+
+        .particle:nth-child(26) { top: 8%;  left: 12%; --x: 1100px; --y: -950px; animation-duration:5.8s; }
+        .particle:nth-child(27) { top: 92%; left: 87%; --x:-1200px; --y: 800px;  animation-duration:6.2s; }
+        .particle:nth-child(28) { top: 15%; left: 68%; --x: -900px; --y:-1100px; animation-duration:5.4s; }
+        .particle:nth-child(29) { top: 77%; left: 3%;  --x: 1300px; --y: 700px;  animation-duration:6.7s; }
+        .particle:nth-child(30) { top: 43%; left: 91%; --x:-1000px; --y: -850px; animation-duration:5.1s; }
+        .particle:nth-child(31) { top: 5%;  left: 45%; --x: 950px;  --y: 1000px; animation-duration:6.9s; }
+        .particle:nth-child(32) { top: 88%; left: 22%; --x: 800px;  --y: -900px; animation-duration:5.6s; }
+        .particle:nth-child(33) { top: 31%; left: 79%; --x:-1150px; --y: 780px;  animation-duration:6.4s; }
+        .particle:nth-child(34) { top: 66%; left: 14%; --x: 1050px; --y: -880px; animation-duration:5.9s; }
+        .particle:nth-child(35) { top: 19%; left: 55%; --x: -980px; --y: 920px;  animation-duration:6.1s; }
+        .particle:nth-child(36) { top: 51%; left: 33%; --x: 1200px; --y: -700px; animation-duration:5.3s; }
+        .particle:nth-child(37) { top: 82%; left: 71%; --x: -850px; --y:-1000px; animation-duration:6.8s; }
+        .particle:nth-child(38) { top: 27%; left: 6%;  --x: 1100px; --y: 850px;  animation-duration:5.7s; }
+        .particle:nth-child(39) { top: 73%; left: 94%; --x:-1300px; --y: 650px;  animation-duration:6.5s; }
+        .particle:nth-child(40) { top: 39%; left: 48%; --x: 900px;  --y: -980px; animation-duration:5.5s; }
+        .particle:nth-child(41) { top: 11%; left: 83%; --x:-1050px; --y: 880px;  animation-duration:6.3s; }
+        .particle:nth-child(42) { top: 95%; left: 29%; --x: 1000px; --y: -820px; animation-duration:5.9s; }
+        .particle:nth-child(43) { top: 4%;  left: 61%; --x: -920px; --y: 1050px; animation-duration:6.6s; }
+        .particle:nth-child(44) { top: 59%; left: 17%; --x: 1150px; --y: -780px; animation-duration:5.2s; }
+        .particle:nth-child(45) { top: 33%; left: 89%; --x:-1100px; --y: 790px;  animation-duration:6.1s; }
+        .particle:nth-child(46) { top: 68%; left: 41%; --x: 980px;  --y: -910px; animation-duration:5.7s; }
+        .particle:nth-child(47) { top: 22%; left: 73%; --x:-1000px; --y: 870px;  animation-duration:6.4s; }
+        .particle:nth-child(48) { top: 85%; left: 8%;  --x: 1250px; --y: -750px; animation-duration:5.5s; }
+        .particle:nth-child(49) { top: 47%; left: 64%; --x: -880px; --y: 960px;  animation-duration:6.8s; }
+        .particle:nth-child(50) { top: 13%; left: 37%; --x: 1070px; --y: -890px; animation-duration:5.9s; }
     </style>
 </head>
-
 <body>
 
-    <!-- Top Navigation -->
     <div class="navbar">
         <div class="nav-left">
-            <a href="assets/home">
-                <img src="assets/logo.png" alt="Home Button">
+            <a href="#" onclick="location.reload(); return false;">
+                <img src="assets/home.png" alt="Home">
             </a>
         </div>
-
         <div class="nav-right">
             <a href="https://discord.gg/MgG8aDgYms" target="_blank">
                 <img src="assets/discord.png" alt="Discord">
@@ -97,20 +169,37 @@
         </div>
     </div>
 
-    <!-- 🔥 Glowing License Box -->
-    <div class="license-box">
-<ul id="license-list">
-            <!-- New licenses will be added here dynamically -->
-        </ul>
-Attack-46rWIvnCx — 1 day(s)<br>
-Attack-zcH84AKKb — 1 day(s)<br>
-Attack-AA9XgjmKc — 1 day(s) <br>
-Attack-zESOo0dcP — 3 day(s) <br>
-Attack-P8iNHSzbr — Lifetime <br>
-Attack-HIugQID6C — 1 day(s) <br>
-Attack-zO1b74CaR — null <br>
-</div>
+    <div class="full-layout">
+        <div class="license-box">
+            <ul id="license-list">
+                <li>Attack-46rWIvnCx — 1 day(s)</li>
+                <li>Attack-zcH84AKKb — 1 day(s)</li>
+                <li>Attack-AA9XgjmKc — 1 day(s)</li>
+                <li>Attack-zESOo0dcP — 3 day(s)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 50 PARTICLES – ALL VISIBLE NOW -->
+    <div id="particle-container">
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+        <div class="particle"></div><div class="particle"></div><div class="particle"></div>
+    </div>
 
 </body>
-
 </html>
