@@ -51,37 +51,21 @@
             font-display: swap;
         }
 
-.license-box {
-    font-family: 'LEMONMILK', sans-serif;
-    width: 500px;
-    min-height: 600px;
-    padding: 40px;
-    background-color: #141618;
-    color: #ff0000;
-    border-radius: 12px;
-    box-shadow: 
-        0 0 20px 6px rgba(255,0,0,0.7),
-        0 0 80px 15px rgba(255,0,0,0.9);
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    overflow: hidden;
-}
-
-/* Logo behind – only logo is transparent */
-.license-box::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 650px;
-    height: 650px;
-    background: url('assets/logo.png') center/contain no-repeat;
-    opacity: 0.15;           /* ← change this anytime (0.10 – 0.25 looks best) */
-    z-index: -1;
-    pointer-events: none;
-}
+        .license-box {
+            font-family: 'LEMONMILK', sans-serif;
+            width: 500px;
+            min-height: 600px;
+            padding: 40px;
+            background: url('assets/logo.png') center/contain no-repeat;
+            opacity: 0.50;
+            color: #ff0000;
+            border-radius: 12px;
+            box-shadow: 0 0 20px 6px rgba(255,0,0,0.7),
+                        0 0 80px 15px rgba(255,0,0,0.9);
+            z-index: 1;
+            position: relative;  
+            text-align: center;
+        }
 
         #license-list { list-style: none; padding: 0; margin: 0; }
         #license-list li {
@@ -218,5 +202,6 @@ Attack-YnHborPPN — 1 minute(s) <br>
 
 </body>
 </html>
+
 
 
